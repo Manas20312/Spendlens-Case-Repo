@@ -287,8 +287,8 @@ function handleSubmit(event) {
   const category = String(data.get("category"));
   const date = String(data.get("date"));
 
-  if (!merchant || !date || !category || !currency || !Number.isFinite(amount) || amount < 0) {
-    els.formError.textContent = "Enter a merchant, date, category, currency, and an non-negative amount.";
+  if (!merchant || !date || !category || !currency || !Number.isFinite(amount) || amount <= 0) {
+    els.formError.textContent = "Enter a merchant, date, category, currency, and an amount greater than zero.";
     return;
   }
 
