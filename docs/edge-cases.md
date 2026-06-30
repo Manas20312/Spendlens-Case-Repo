@@ -2,7 +2,7 @@
 
 | Failure mode | Current handling | Correct behavior |
 | --- | --- | --- |
-| Amount is `0` | The form rejects it and keeps the row out of the table. | Require a positive amount for normal expenses; model credits/refunds separately if the product later supports them. |
+| Amount is `0` | The form allows it and summaries include `$0.00`. | Keep this valid only if zero-value rows are intentionally part of the finance workflow. |
 | Amount is negative | The form rejects negative values. | Decide product policy: either reject negatives or model them explicitly as refunds/credits with clear labels. |
 | Merchant has special characters like `<script>` | Merchant names are escaped before rendering. | Continue escaping all user-entered text and never inject raw HTML. |
 | Rate is `null`, undefined, or `0` | Conversion returns `null`; displayed rows show `Missing rate`. | Block bad rate entries from summary totals and show a clear actionable error. |
