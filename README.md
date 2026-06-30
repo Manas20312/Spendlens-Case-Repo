@@ -4,9 +4,9 @@ This project is a small browser-based dashboard for reviewing multi-currency exp
 
 ## Live URL
 
-Add the deployed URL here after publishing:
+Deployed URL:
 
-`https://your-deployed-site.example`
+`https://spendlens-case-repo.netlify.app`
 
 ## Run Locally
 
