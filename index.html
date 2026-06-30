@@ -8,21 +8,22 @@
   </head>
   <body>
     <header class="topbar">
-      <div>
-        <p class="eyebrow">Product Analyst Intern Case</p>
-        <h1>Spendlens Expense Dashboard</h1>
-      </div>
-      <div class="total-panel">
-        <span>Total spend</span>
-        <strong>$0.00</strong>
-      </div>
+      <div><p class="eyebrow">Product Analyst Intern Case</p><h1>Spendlens Expense Dashboard</h1></div>
+      <div class="total-panel"><span>Total spend</span><strong id="overallTotal">$0.00</strong></div>
     </header>
     <main>
-      <section class="summary-card">
-        <p class="eyebrow">Part A</p>
-        <h2>Category Summary</h2>
-        <p class="helper-text">Dashboard shell for the multi-currency expense case.</p>
+      <section class="summary-grid">
+        <article class="summary-card">
+          <p class="eyebrow">Part A</p><h2>Category Summary</h2>
+          <div class="table-wrap"><table><thead><tr><th>Category</th><th>Count</th><th>Total USD</th><th>Largest merchant</th><th>Largest USD</th></tr></thead><tbody id="categoryBody"></tbody></table></div>
+        </article>
+        <article class="summary-card"><p class="eyebrow">Top merchants</p><h2>Highest Spend</h2><ol id="merchantList" class="merchant-list"></ol></article>
+      </section>
+      <section class="summary-card workspace-lite">
+        <p class="eyebrow">Live data</p><h2>Expenses</h2>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Merchant</th><th>Original</th><th>Category</th><th>USD</th></tr></thead><tbody id="expenseBody"></tbody></table></div>
       </section>
     </main>
+    <script src="app.js"></script>
   </body>
 </html>
