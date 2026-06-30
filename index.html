@@ -8,22 +8,217 @@
   </head>
   <body>
     <header class="topbar">
-      <div><p class="eyebrow">Product Analyst Intern Case</p><h1>Spendlens Expense Dashboard</h1></div>
-      <div class="total-panel"><span>Total spend</span><strong id="overallTotal">$0.00</strong></div>
+      <div>
+        <p class="eyebrow">Product Analyst Intern Case</p>
+        <h1>Spendlens Expense Dashboard</h1>
+      </div>
+      <div class="total-panel">
+        <span>Total spend</span>
+        <strong id="overallTotal">$0.00</strong>
+      </div>
     </header>
+
     <main>
-      <section class="summary-grid">
-        <article class="summary-card">
-          <p class="eyebrow">Part A</p><h2>Category Summary</h2>
-          <div class="table-wrap"><table><thead><tr><th>Category</th><th>Count</th><th>Total USD</th><th>Largest merchant</th><th>Largest USD</th></tr></thead><tbody id="categoryBody"></tbody></table></div>
+      <section class="summary-grid" aria-label="Summary dashboard">
+        <article class="summary-card wide">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Part A</p>
+              <h2>Category Summary</h2>
+            </div>
+            <span id="activeFilterLabel" class="pill">All categories</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Count</th>
+                  <th>Total USD</th>
+                  <th>Largest merchant</th>
+                  <th>Largest USD</th>
+                </tr>
+              </thead>
+              <tbody id="categoryBody"></tbody>
+            </table>
+          </div>
         </article>
-        <article class="summary-card"><p class="eyebrow">Top merchants</p><h2>Highest Spend</h2><ol id="merchantList" class="merchant-list"></ol></article>
+
+        <div class="summary-side">
+          <article class="summary-card chart-card">
+            <p class="eyebrow">Spend mix</p>
+            <h2>Category Pie Chart</h2>
+            <div class="pie-layout">
+              <div id="categoryPie" class="category-pie" aria-label="Category spend pie chart"></div>
+              <div id="pieLegend" class="pie-legend"></div>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <p class="eyebrow">Top merchants</p>
+            <h2>Highest Spend</h2>
+            <ol id="merchantList" class="merchant-list"></ol>
+          </article>
+        </div>
       </section>
-      <section class="summary-card workspace-lite">
-        <p class="eyebrow">Live data</p><h2>Expenses</h2>
-        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Merchant</th><th>Original</th><th>Category</th><th>USD</th></tr></thead><tbody id="expenseBody"></tbody></table></div>
+
+      <section class="toolbar" aria-label="Dashboard controls">
+        <div>
+          <label for="eurRate">EUR per USD what-if rate</label>
+          <div class="slider-row">
+            <input id="eurRate" type="range" min="0.80" max="1.10" step="0.0001" value="0.9201" />
+            <output id="eurRateValue" for="eurRate">0.9201</output>
+          </div>
+          <p id="rateDelta" class="muted">Total change vs base rate: $0.00</p>
+        </div>
+        <button id="resetRate" type="button" class="ghost-button">Reset rate</button>
+      </section>
+
+      <section class="workspace">
+        <article class="summary-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Live data</p>
+              <h2>Expenses</h2>
+            </div>
+            <div class="sort-controls" aria-label="Sort expenses">
+              <label class="compact-filter" for="categoryFilter" aria-label="Category filter">
+                <span class="sr-only">Category</span>
+                <select id="categoryFilter">
+                  <option value="">All categories</option>
+                </select>
+              </label>
+              <button type="button" data-sort="date">Sort date</button>
+              <button type="button" data-sort="usd">Sort USD</button>
+            </div>
+          </div>
+          <div class="table-wrap expense-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Merchant</th>
+                  <th>Original</th>
+                  <th>Category</th>
+                  <th>USD</th>
+                </tr>
+              </thead>
+              <tbody id="expenseBody"></tbody>
+            </table>
+          </div>
+          <p id="emptyState" class="empty-state" hidden>No expenses match this category.</p>
+        </article>
+
+        <aside class="side-stack">
+          <article class="summary-card">
+            <p class="eyebrow">Add expense</p>
+            <h2>New Row</h2>
+            <form id="expenseForm" novalidate>
+              <label>
+                Merchant
+                <input name="merchant" required maxlength="80" placeholder="Merchant name" />
+              </label>
+              <div class="form-row">
+                <label>
+                  Amount
+                  <input name="amount" required type="number" min="0.01" step="0.01" placeholder="0.00" />
+                </label>
+                <label>
+                  Currency
+                  <select name="currency" required id="currencySelect"></select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>
+                  Category
+                  <select name="category" required>
+                    <option>Travel</option>
+                    <option>Food</option>
+                    <option>Software</option>
+                    <option>Entertainment</option>
+                  </select>
+                </label>
+                <label>
+                  Date
+                  <input name="date" required type="date" />
+                </label>
+              </div>
+              <p id="formError" class="form-error" role="alert"></p>
+              <button type="submit" class="primary-button">Add expense</button>
+            </form>
+          </article>
+
+          <article class="summary-card">
+            <p class="eyebrow">Rate setup</p>
+            <h2>Add Currency Rate</h2>
+            <p class="helper-text">
+              Add a supported currency using the same format as the source table: local currency per 1 USD.
+            </p>
+            <form id="rateForm" novalidate>
+              <label>
+                Currency code
+                <input name="currencyCode" required maxlength="3" placeholder="CHF" />
+              </label>
+              <label>
+                Rate per USD
+                <input name="currencyRate" required type="number" min="0.0001" step="0.0001" placeholder="0.8850" />
+              </label>
+              <p id="rateFormError" class="form-error" role="alert"></p>
+              <button type="submit" class="primary-button">Add rate</button>
+            </form>
+            <div class="rate-list" aria-live="polite">
+              <h3>Supported currencies</h3>
+              <p id="supportedCurrencies"></p>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="notes-section" aria-label="Assignment notes">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Part A written response</p>
+            <h2>Currency Logic Notes</h2>
+          </div>
+          <span class="pill">Board-report ready</span>
+        </div>
+        <div class="answer-grid">
+          <article class="answer-block">
+            <h3>How is the currency conversion logic structured?</h3>
+            <p>
+              Rates live in one lookup object keyed by currency code, with USD as the base. Because
+              the provided rates are quoted as local currency per 1 USD, each expense is converted
+              by dividing the original amount by its currency rate.
+            </p>
+          </article>
+          <article class="answer-block">
+            <h3>Why structure it this way?</h3>
+            <p>
+              The app uses one conversion function for the summary, merchant ranking, expense table,
+              filters, added rows, and what-if rate changes. That keeps the math consistent and makes
+              the output easier for a finance user to trust.
+            </p>
+          </article>
+          <article class="answer-block">
+            <h3>What changes if a 25th currency is added tomorrow?</h3>
+            <p>
+              Only the rate table needs a new currency code and valid rate. Once added, the currency
+              appears in the expense form and the same summary logic can process new rows without a
+              separate code path.
+            </p>
+          </article>
+          <article class="answer-block">
+            <h3>What if a rate is null or missing?</h3>
+            <p>
+              A missing or invalid rate would otherwise create bad USD values and distort totals.
+              The app guards against that by validating rates before conversion, rejecting unsupported
+              form entries, and showing a clear missing-rate state instead of hiding the issue.
+            </p>
+          </article>
+        </div>
       </section>
     </main>
+
     <script src="app.js"></script>
   </body>
 </html>
