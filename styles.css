@@ -410,6 +410,23 @@ tr:last-child td {
   font-weight: 900;
 }
 
+.merchant-list li:nth-child(1)::before {
+  background: linear-gradient(135deg, #004d00 0%, #00a33f 58%, #d7f56e 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 77, 0, 0.24);
+}
+
+.merchant-list li:nth-child(2)::before {
+  background: linear-gradient(135deg, rgba(0, 122, 51, 0.86), rgba(102, 179, 161, 0.78), rgba(215, 245, 110, 0.76));
+  color: #fff;
+  box-shadow: 0 7px 14px rgba(0, 122, 51, 0.16);
+}
+
+.merchant-list li:nth-child(3)::before {
+  background: linear-gradient(135deg, rgba(0, 122, 51, 0.28), rgba(178, 224, 212, 0.82), rgba(243, 250, 195, 0.96));
+  color: var(--accent-strong);
+}
+
 .sort-controls {
   display: flex;
   gap: 8px;
