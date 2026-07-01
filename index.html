@@ -185,35 +185,35 @@
         <div class="answer-grid">
           <article class="answer-block">
             <h3>How is the currency conversion logic structured?</h3>
-            <p>
-              Rates live in one lookup object keyed by currency code, with USD as the base. Because
-              the provided rates are quoted as local currency per 1 USD, each expense is converted
-              by dividing the original amount by its currency rate.
-            </p>
+            <ul>
+              <li>Rates are stored in one lookup object keyed by currency code.</li>
+              <li>USD is used as the base currency for the dashboard.</li>
+              <li>Each expense is converted to USD by dividing the original amount by its currency rate.</li>
+            </ul>
           </article>
           <article class="answer-block">
             <h3>Why structure it this way?</h3>
-            <p>
-              The app uses one conversion function for the summary, merchant ranking, expense table,
-              filters, added rows, and what-if rate changes. That keeps the math consistent and makes
-              the output easier for a finance user to trust.
-            </p>
+            <ul>
+              <li>One conversion function powers summaries, rankings, filters, tables, and new rows.</li>
+              <li>The same math is reused for the what-if EUR rate changes.</li>
+              <li>Finance users can trace and trust the totals more easily.</li>
+            </ul>
           </article>
           <article class="answer-block">
             <h3>What changes if a 25th currency is added tomorrow?</h3>
-            <p>
-              Only the rate table needs a new currency code and valid rate. Once added, the currency
-              appears in the expense form and the same summary logic can process new rows without a
-              separate code path.
-            </p>
+            <ul>
+              <li>Add the new currency code and a valid rate to the rate table.</li>
+              <li>The currency then appears in the expense form.</li>
+              <li>Existing summary logic processes new rows without a separate code path.</li>
+            </ul>
           </article>
           <article class="answer-block">
             <h3>What if a rate is null or missing?</h3>
-            <p>
-              A missing or invalid rate would otherwise create bad USD values and distort totals.
-              The app guards against that by validating rates before conversion, rejecting unsupported
-              form entries, and showing a clear missing-rate state instead of hiding the issue.
-            </p>
+            <ul>
+              <li>Missing or invalid rates can create bad USD totals.</li>
+              <li>The app validates rates before conversion.</li>
+              <li>Unsupported form entries are rejected and a clear missing-rate state is shown.</li>
+            </ul>
           </article>
         </div>
       </section>

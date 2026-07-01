@@ -478,7 +478,8 @@ form {
 }
 
 .helper-text,
-.notes-section p {
+.notes-section p,
+.answer-block ul {
   color: #344054;
   font-size: 0.93rem;
   line-height: 1.55;
@@ -532,6 +533,19 @@ form {
 
 .answer-block p {
   margin-top: 10px;
+}
+
+.answer-block ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.answer-block li + li {
+  margin-top: 7px;
+}
+
+.answer-block li::marker {
+  color: var(--accent-strong);
 }
 
 .empty-state {
