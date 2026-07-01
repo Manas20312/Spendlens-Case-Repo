@@ -11,3 +11,11 @@ This is important because Spendlens is trying to help people manage their spendi
 - I used a static dataset and in-memory storage since persistence was not called for in the brief. The implementation was easier and quicker to ship, but added expenses will vanish with refreshes.
 - I stuck with plain tables rather than extensive visualizations. The dashboard may be duller, but the important numbers are easy to double-check.
 - I left categories set to the provided dataset. Fewer data entry mistakes, but editable categories would be necessary for real world use case.
+
+## Next Sprint Priorities
+
+- Add persistence and CSV import/export. This would make the tool usable beyond a demo and reduce manual finance work.
+- Add validation and error reporting for missing rates, unsupported currencies, and bad uploaded rows. This would protect board-report totals from silent data problems.
+- Add trend views by month and category. This would move the product from reporting what happened to helping the team notice spending patterns earlier.
+
+The app is functional for the assignment scope, but it is not production-ready until it has persistence, stronger import validation, and a clearer data-review workflow.
