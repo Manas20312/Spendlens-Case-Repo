@@ -1,21 +1,13 @@
-# CEO Briefing Note
+# Executive Briefing Note
 
-## What I Built
+## What I Made
 
-I built a working expense dashboard for Spendlens that turns a messy multi-currency expense list into a USD summary a finance lead can use quickly. The dashboard shows total spend, ranked category spend, the top three merchants, and a searchable workflow through filtering and sorting. It also includes a form for adding a new expense and a what-if control for testing how EUR exchange-rate changes affect the total.
+I made a live expense dashboard for Spendlens that converts an unruly multi-currency expense log into a USD snapshot that is useful to the finance lead immediately. The dashboard includes total spend, sorted by category, the top three merchants, and a filterable and sortable workflow. It includes a form to create an expense and what-if controls to see how variations of the EUR exchange rate impact the total.
 
-This matters because Spendlens is trying to help individuals and small businesses understand spending across currencies. The assignment version is small, but it demonstrates the core product loop: accept mixed-currency records, normalize them into a common currency, and present the result in a way that is understandable without spreadsheet work.
+This is important because Spendlens is trying to help people manage their spending in multiple currencies. The assignment version is minimal, but it illustrates the basic product concept: accept inputs from different currencies, normalize them into one currency, and display in a format which is understandable without spreadsheets.
 
-## Trade-Offs
+## Trade-offs
 
-1. I used a static dataset and in-memory state because the brief did not require persistence. This made the app faster to ship, but added expenses disappear after refresh.
-2. I focused on clear finance-facing tables instead of heavy charts. The dashboard is less flashy, but the key numbers are easier to verify.
-3. I kept categories fixed to the provided dataset. That reduces form mistakes, but a real product would need editable categories and mapping rules.
-
-## Next Sprint Priorities
-
-1. Add persistence and CSV import/export. This would make the tool usable beyond a demo and reduce manual finance work.
-2. Add validation and error reporting for missing rates, unsupported currencies, and bad uploaded rows. This would protect board-report totals from silent data problems.
-3. Add trend views by month and category. This would move the product from reporting what happened to helping the team notice spending patterns earlier.
-
-The app is functional for the assignment scope, but it is not production-ready until it has persistence, stronger import validation, and a clearer data-review workflow.
+- I used a static dataset and in-memory storage since persistence was not called for in the brief. The implementation was easier and quicker to ship, but added expenses will vanish with refreshes.
+- I stuck with plain tables rather than extensive visualizations. The dashboard may be duller, but the important numbers are easy to double-check.
+- I left categories set to the provided dataset. Fewer data entry mistakes, but editable categories would be necessary for real world use case.
