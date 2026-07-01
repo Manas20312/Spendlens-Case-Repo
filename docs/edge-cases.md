@@ -4,7 +4,6 @@
 | --- | --- | --- |
 | Amount is `0` | The form rejects it and keeps the row out of the table. | Require a positive amount for normal expenses; model credits/refunds separately if the product later supports them. |
 | Amount is negative | The form rejects negative values. | Decide product policy: either reject negatives or model them explicitly as refunds/credits with clear labels. |
-| Merchant has special characters like `<script>` | Merchant names are escaped before rendering. | Continue escaping all user-entered text and never inject raw HTML. |
 | Rate is `null`, undefined, or `0` | Conversion returns `null`; displayed rows show `Missing rate`. | Block bad rate entries from summary totals and show a clear actionable error. |
 | Add form submitted with empty fields | The form shows a validation message. | Keep the row out of the dataset until all required fields pass validation. |
 | Very large amount | It renders using normal table layout and may become visually wide. | Add max-width wrapping or abbreviated display for extreme values while preserving exact values on hover/export. |
